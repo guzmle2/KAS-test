@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'kas-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <header>
+      <kas-sidebar-v1>
+        <li>
+          <a>First Sidebar Link</a>
+        </li>
+        <li>
+          <a>Second Sidebar Link</a>
+        </li>
+      </kas-sidebar-v1>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>`
 })
 export class AppComponent {
-  title = 'KAS-test';
+
 }
