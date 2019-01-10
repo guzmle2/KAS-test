@@ -1,6 +1,7 @@
 {
   "name": "kas-test",
   "version": "0.0.0",
+  "author": "Leonor Guzman <guzmle2@gmail.com>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
