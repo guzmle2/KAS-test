@@ -8,6 +8,7 @@ import {LoadingComponent} from './loading/loading.component';
 import {FormAddWeatherComponent} from './form-add-weather/form-add-weather.component';
 import {FormsModule} from '@angular/forms';
 import {CountrysComponent} from './countrys/countrys.component';
+import {MainService} from '../main/main.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {CountrysComponent} from './countrys/countrys.component';
     FormAddWeatherComponent
   ],
   providers: [
+    MainService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorApikey, multi: true}
   ]
 })
