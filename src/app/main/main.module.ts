@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {MainComponent} from './main.component';
 import {SharedModule} from '../shared/shared.module';
+import {MainService} from './main.service';
 
 @NgModule({
   imports: [
@@ -11,6 +12,9 @@ import {SharedModule} from '../shared/shared.module';
   ],
   declarations: [
     MainComponent
+  ],
+  providers: [
+    MainService
   ]
 })
 export class MainModule {

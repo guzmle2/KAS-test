@@ -1,0 +1,33 @@
+<li *ngIf="isFinished; else temFinished">
+  <a >
+    <span>{{citySelected.country}} - {{citySelected.name}}</span>
+    <i class="material-icons red-text " >delete</i>
+  </a>
+</li>
+
+<ng-template #temFinished>
+  <div class="row">
+    <div class="card col s12 ">
+
+      <div class="col s3">
+        <div class="input-field center-align center">
+          <input class="center center-align"
+                 placeholder="CL"
+                 (input)="valueSelected(-1)" [(ngModel)]="city.country" type="text"
+                 [id]=" idCountry">
+        </div>
+      </div>
+      <div class="col s8">
+        <div class="input-field ">
+          <input
+            placeholder="Santiago"
+            [disabled]="disabled || !city.country" [(ngModel)]="city.name" type="text" [id]="idName">
+        </div>
+      </div>
+      <div class=" s12 center">
+        <button [disabled]="!citySelected" (click)="loadCity()" class="waves-effect waves-light btn-large">Load</button>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</ng-template>

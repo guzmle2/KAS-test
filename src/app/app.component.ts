@@ -5,16 +5,13 @@ import {Component} from '@angular/core';
   template: `
     <header>
       <kas-sidebar-v1>
-        <li>
-          <a>First Sidebar Link</a>
-        </li>
-        <li>
-          <a>Second Sidebar Link</a>
-        </li>
+        <kas-form-add-weather></kas-form-add-weather>
       </kas-sidebar-v1>
     </header>
     <main>
-      <router-outlet></router-outlet>
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
     </main>`
 })
 export class AppComponent {
