@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
+import {StoreService} from '../store.service';
 
 declare var $: any;
 declare var M: any;
@@ -18,8 +19,9 @@ export class FormAddWeatherComponent implements OnInit, AfterViewInit {
   @Input() city = <any>{};
   @Output() finishSearch = new EventEmitter();
   @Output() removeCity = new EventEmitter();
+  store = this.injector.get(StoreService);
 
-  constructor() {
+  constructor(protected injector: Injector) {
   }
 
   ngOnInit() {
@@ -33,11 +35,12 @@ export class FormAddWeatherComponent implements OnInit, AfterViewInit {
   autoComplet(key) {
     let a = this.data.map(e => e[key]);
     if (key === 'name') {
-      a = this.data.filter(h => h.country === this.city.country.toUpperCase());
+      a = this.data.filter(h => h.country.toLowerCase() === this.city.country.toLowerCase());
+      a = a.filter(h => h.country.toLowerCase() === this.city.country.toLowerCase() && !this.isStore(h));
       a = a.map(e => e[key]);
     }
     a = a.filter((item, pos) => a.indexOf(item) === pos);
-    a = a.reduce((result, item, index) => {
+    a = a.reduce((result, item) => {
       result[item] = null;
       return result;
     }, {});
@@ -50,7 +53,7 @@ export class FormAddWeatherComponent implements OnInit, AfterViewInit {
     $(id).autocomplete({
       data: array, limit: 10,
       onAutocomplete: val => {
-        if (idKey === 'country' && this.city.country && val !== this.city.country.toUpperCase()) {
+        if (idKey === 'country' && this.city.country && val.toLowerCase() !== this.city.country.toLowerCase()) {
           this.valueSelected(val);
         }
         if (val !== this.city[idKey]) {
@@ -75,6 +78,7 @@ export class FormAddWeatherComponent implements OnInit, AfterViewInit {
       return h.name.toLowerCase() === this.city.name.toLowerCase()
         && h.country.toLowerCase() === this.city.country.toLowerCase();
     });
+
     return retorno;
   }
 
@@ -83,5 +87,14 @@ export class FormAddWeatherComponent implements OnInit, AfterViewInit {
       this.isFinished = true;
       this.finishSearch.emit(this.citySelected);
     }
+  }
+
+  isStore(city) {
+    let retorno = false;
+    if (!this.isFinished && city && this.store.countries.length) {
+      const index = this.store.countries.findIndex(a => JSON.stringify(a) === JSON.stringify(city));
+      retorno = index !== -1;
+    }
+    return retorno;
   }
 }

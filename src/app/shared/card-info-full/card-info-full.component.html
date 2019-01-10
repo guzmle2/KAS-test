@@ -1,34 +1,37 @@
 <div class="row">
   <div class="col s12 ">
-    <div class="card white darken-1">
+    <div class="card " [ngClass]="colorCard" >
       <div class="card-content " [class.center]="isLoading">
-        <kas-loading *ngIf="isLoading; else loadComplete"></kas-loading>
+        <div class="row" *ngIf="isLoading; else loadComplete">
+          <kas-loading></kas-loading>
+        </div>
         <ng-template #loadComplete>
-          <p>
-            <i [class]="iconWeather"></i>
-            {{infoText.main + (infoText.description ? (', ' + infoText.description) : '')}}</p>
           <span class=" row">
+            <div class="col s12">{{infoText.main + (infoText.description ? (', ' + infoText.description) : '')}}</div>
             <div class="col s12 m8 card-title bold">
               <div>{{data?.name}}
                 <small>({{data?.sys.country}})</small>
               </div>
               <div *ngIf="main">{{main.temp + ' ' + metricSymbol}}</div>
+              <div class="center">
+                <i [class]="iconWeather"></i>
+              </div>
             </div>
             <div *ngIf="main" class="col s12 m4">
               <div *ngIf="main.pressure">
-                <div>
+                <div class="col s12">
                   <span class="left">Presión:</span>
                   <span class="right">{{main.pressure}} hPa</span>
                 </div>
-                <div>
+                <div class="col s12">
                   <span class="left">Humedad:</span>
                   <span class="right">{{main.humidity}} %</span>
                 </div>
-                <div>
+                <div class="col s12">
                   <span class="left">Temp. Min:</span>
                   <span class="right">{{main.temp_min}} {{metricSymbol}}</span>
                 </div>
-                <div>
+                <div class="col s12">
                   <span class="left">Temp. Max:</span>
                   <span class="right">{{main.temp_max}} {{metricSymbol}}</span>
                 </div>

@@ -2,6 +2,7 @@ import {Component, Injector, Input, OnInit} from '@angular/core';
 import {MainService} from '../../main/main.service';
 import {StoreService} from '../store.service';
 import {TYPE_METRICS} from '../models/type-metrics.enum';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'kas-card-info-full',
@@ -16,6 +17,7 @@ export class CardInfoFullComponent implements OnInit {
   storeService = this.injector.get(StoreService);
   metrics = this.storeService.metrics;
   weatherIcons = require('src/assets/icons.json');
+  interval: any;
 
   constructor(protected injector: Injector) {
   }
@@ -75,6 +77,25 @@ export class CardInfoFullComponent implements OnInit {
   set id(id) {
     this._id = id;
     this.getInfo(this._id);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(() => {
+      this.getInfo(this._id);
+    }, this.storeService.timeInterval);
+
+  }
+
+  get colorCard() {
+    const day = ' blue darken-1 white-text';
+    const night = ' grey darken-2 white-text';
+    if (this.iconWeather.includes('day')) {
+      return day;
+    }
+    if (this.iconWeather.includes('night')) {
+      return night;
+    }
+    return '';
   }
 
   get id() {

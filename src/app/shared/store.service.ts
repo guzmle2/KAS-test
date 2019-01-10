@@ -6,7 +6,14 @@ import {TYPE_METRICS} from './models/type-metrics.enum';
 })
 export class StoreService {
   metrics: TYPE_METRICS = TYPE_METRICS.CELSIUS;
+  timeInterval = 30000;
   private _countries = [];
+  cityDefault = [
+    {country: 'cl', name: 'santiago'},
+    {country: 'ar', name: 'buenos aires'},
+    {country: 'pe', name: 'lima'},
+    {country: 'br', name: 'sao paulo'}
+  ];
 
   constructor() {
   }
