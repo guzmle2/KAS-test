@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
+import {StoreService} from '../shared/store.service';
 
 @Component({
   selector: 'kas-main',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  storage = this.injector.get(StoreService);
+
+  constructor(protected injector: Injector) {
+  }
 
   ngOnInit() {
   }
 
+  get countries() {
+    return this.storage.countries || [];
+  }
 }

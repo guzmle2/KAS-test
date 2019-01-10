@@ -1,7 +1,7 @@
 <li *ngIf="isFinished; else temFinished">
-  <a >
+  <a (click)="removeCity.emit(citySelected)">
     <span>{{citySelected.country}} - {{citySelected.name}}</span>
-    <i class="material-icons red-text " >delete</i>
+    <i class="material-icons red-text ">delete</i>
   </a>
 </li>
 

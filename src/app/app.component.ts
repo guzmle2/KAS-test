@@ -4,9 +4,7 @@ import {Component} from '@angular/core';
   selector: 'kas-root',
   template: `
     <header>
-      <kas-sidebar-v1>
-        <kas-form-add-weather></kas-form-add-weather>
-      </kas-sidebar-v1>
+      <kas-countrys></kas-countrys>
     </header>
     <main>
       <div class="row">
