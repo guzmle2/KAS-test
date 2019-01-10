@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ComponentFactoryResolver, Injector, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {StoreService} from '../shared/store.service';
-import {FormAddWeatherComponent} from '../shared/form-add-weather/form-add-weather.component';
+import {StoreService} from '../store.service';
+import {FormAddWeatherComponent} from '../form-add-weather/form-add-weather.component';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'kas-countrys',
@@ -24,24 +26,18 @@ export class CountrysComponent implements OnInit, AfterViewInit {
     this.storage.addCountry(country);
   }
 
-  removeCountry(country) {
-    this.storage.removeCountry(country);
-  }
 
   instanceForm(city?) {
     const id = `id_${new Date().getTime()}`;
     const factory = this.fr.resolveComponentFactory(FormAddWeatherComponent);
-    const ref = this.container.createComponent(factory);
+    const ref: any = this.container.createComponent(factory);
     ref.instance.finishSearch.subscribe(e => {
       this.addCountry(e);
       if (!city) {
         this.instanceForm();
       }
     });
-    ref.instance.removeCity.subscribe(z => {
-      this.removeCountry(z);
-      this.removeComponent(id);
-    });
+    ref.instance.removeCity.subscribe(z => this.removeComp(z, id));
     ref.changeDetectorRef.detectChanges();
     if (city) {
       ref.instance.city = city;
@@ -65,5 +61,19 @@ export class CountrysComponent implements OnInit, AfterViewInit {
       this.instanceForm(city);
     }
     this.instanceForm();
+  }
+
+  removeComp(country, id) {
+    jQuery('#modal1').modal();
+    jQuery('#modal1').modal('open');
+    jQuery('#id_country').html(country.name);
+    jQuery('#id_deleted').val(country.id);
+    this.storage.removeCountry(country);
+    this.removeComponent(id);
+  }
+
+  removeHistory() {
+    const id = jQuery('#id_deleted').val();
+    this.storage.removeHistory(id);
   }
 }

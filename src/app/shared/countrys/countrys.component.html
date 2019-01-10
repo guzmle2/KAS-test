@@ -1,0 +1,15 @@
+<kas-sidebar-v1>
+  <ng-template #cityWeather></ng-template>
+</kas-sidebar-v1>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div>City deleted (<span id=id_country></span>)</div>
+    <h5>¿Desea eliminar el historial ?</h5>
+    <input id="id_deleted" type="hidden">
+  </div>
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn green">No</a>
+    <a (click)="removeHistory()" class="modal-close waves-effect waves-red  btn red">Si</a>
+  </div>
+</div>

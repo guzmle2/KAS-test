@@ -7,6 +7,7 @@ import {InterceptorApikey} from './interceptor-apikey';
 import {LoadingComponent} from './loading/loading.component';
 import {FormAddWeatherComponent} from './form-add-weather/form-add-weather.component';
 import {FormsModule} from '@angular/forms';
+import {CountrysComponent} from './countrys/countrys.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {FormsModule} from '@angular/forms';
     SidebarV1Component,
     CardInfoFullComponent,
     LoadingComponent,
-    FormAddWeatherComponent
+    FormAddWeatherComponent,
+    CountrysComponent
   ],
   exports: [
     CommonModule,
@@ -28,7 +30,8 @@ import {FormsModule} from '@angular/forms';
     SidebarV1Component,
     CardInfoFullComponent,
     LoadingComponent,
-    FormAddWeatherComponent
+    FormAddWeatherComponent,
+    CountrysComponent
   ],
   entryComponents: [
     FormAddWeatherComponent

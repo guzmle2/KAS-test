@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col s12 ">
-    <div class="card " [ngClass]="colorCard" >
-      <div class="card-content " [class.center]="isLoading">
-        <div class="row" *ngIf="isLoading; else loadComplete">
+    <div class="card " [ngClass]="colorCard" (click)="viewDetail()">
+      <div class="card-content " [class.center]="!data">
+        <div class="row" *ngIf="!data; else loadComplete">
           <kas-loading></kas-loading>
         </div>
         <ng-template #loadComplete>
@@ -12,7 +12,7 @@
               <div>{{data?.name}}
                 <small>({{data?.sys.country}})</small>
               </div>
-              <div *ngIf="main">{{main.temp + ' ' + metricSymbol}}</div>
+              <div *ngIf="main">{{main.temp | number:'1.1-1'}} {{ metricSymbol}}</div>
               <div class="center">
                 <i [class]="iconWeather"></i>
               </div>

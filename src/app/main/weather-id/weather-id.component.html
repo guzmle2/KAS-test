@@ -1,0 +1,18 @@
+<div>
+  <div class="col" [ngClass]="{'s12':!itemDetail,'s8':itemDetail}">
+    <kas-card-info-full *ngFor="let item of countries"
+                        [color_card]="(itemDetail && itemDetail.id === item.id) ?'green white-text':null"
+                        [id]="item.id"
+                        (eventDetail)="itemDetail= $event"
+                        [ngClass]="{'l4':!itemDetail,'':itemDetail}"
+                        class="col m6  cursos-pointer">
+    </kas-card-info-full>
+  </div>
+  <div *ngIf="itemDetail" class="col s4">
+    <p></p>
+    <button (click)="itemDetail = null"
+            class="modal-close waves-effect waves-red btn  white green-text right right-align ">Closed
+    </button>
+    <kas-history-temp [obj]="itemDetail"></kas-history-temp>
+  </div>
+</div>

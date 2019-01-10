@@ -1,0 +1,26 @@
+<div id="striped" class="section scrollspy" *ngIf="obj" style="position: relative">
+  <h3 class="header no-pad no-marg" >History
+    <button class="btn-floating red " (click)="clearHistory()">
+      <i class="material-icons white-text right-align right ">delete</i></button></h3>
+  <h5 class="header">{{obj.name}}
+    <small>({{obj?.sys.country}})</small>
+  </h5>
+  <div class="row asd-d" >
+    <div class="col s12">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of items.temps">
+            <td>{{it.date | date:'M/d/yy, h:mm:ss a'}}</td>
+            <td>{{it.temp}} C°</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
